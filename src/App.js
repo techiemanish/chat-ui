@@ -31,7 +31,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100 p-4">
+      {/* <div className="min-h-screen bg-gray-100 p-4"> */}
         <Routes>
           <Route path="/" element={<AuthApp />} />
           <Route 
@@ -39,7 +39,7 @@ function App() {
             element={<ChatRoom indicator={flag} initialMessages={initialMessages} />} 
           />
         </Routes>
-      </div>
+      {/* </div> */}
     </Router>
   );
 }

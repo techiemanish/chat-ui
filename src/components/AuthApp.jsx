@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Mock user data - replace with actual API calls
 const mockUsers = [
   { id: '1', username: 'manish', name: 'Manish Tiwari' },
-  { id: '2', username: 'alice', name: 'John Doe' },
+  { id: '2', username: 'john', name: 'John Doe' },
   { id: '3', username: 'bob', name: 'Bob Johnson' },
 ];
 
@@ -109,6 +109,7 @@ const AuthApp = () => {
             >
               {isLogin ? 'Login' : 'Sign Up'}
             </button>
+            <p><b>Note: </b>In development, You can login by entering anything!!</p>
           </form>
           
           <div className="mt-4 text-center">

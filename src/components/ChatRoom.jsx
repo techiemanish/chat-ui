@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import ScrollToTop from "./ScrollToTop";
 
 const ChatRoom = (props) => {
   const [messages, setMessages] = useState([]);
@@ -89,47 +90,65 @@ const ChatRoom = (props) => {
   }, [messages]);
 
   return (
-    <div className="mt-4 bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
-        <div className="mb-4">
-          <label>User ID: </label>
-          <select
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-            className="ml-2 border p-1"
-          >
-            <option value="manish">manish</option>
-            <option value="user">user</option>
-          </select>
-          <label className="ml-4">Talking To: </label>
-          <select
-            value={receiverId}
-            onChange={(e) => setReceiverId(e.target.value)}
-            className="ml-2 border p-1"
-          >
-            <option value="manish">manish</option>
-            <option value="user">user</option>
-          </select>
+    <>
+    <ScrollToTop/>
+  <div className="flex justify-center items-start p-4 bg-gray-100 h-screen">
+    <div className="w-full max-w-md">
+      <div className="bg-white rounded-xl shadow-lg p-4">
+        {/* User Selection */}
+        <div className="flex flex-col space-y-2 mb-4 sm:flex-row sm:space-y-0 sm:space-x-2">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">User ID:</label>
+            <select
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded-md text-sm"
+            >
+              <option value="manish">manish</option>
+              <option value="user">user</option>
+            </select>
+          </div>
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Talking To:</label>
+            <select
+              value={receiverId}
+              onChange={(e) => setReceiverId(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded-md text-sm"
+            >
+              <option value="manish">manish</option>
+              <option value="user">user</option>
+            </select>
+          </div>
         </div>
-        <div className="h-64 overflow-y-auto border p-2 mb-2 rounded">
+
+        {/* Messages Area */}
+        <div className="h-64 overflow-y-auto border border-gray-200 rounded-lg p-2 mb-3">
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`p-2 my-1 rounded ${msg.senderId === userId ? 'bg-blue-100 text-right' : 'bg-green-200 text-left'}`}
+              className={`p-2 my-1 rounded-lg max-w-[80%] ${
+                msg.senderId === userId 
+                  ? 'ml-auto bg-blue-100 text-right rounded-br-none' 
+                  : 'mr-auto bg-green-200 text-left rounded-bl-none'
+              }`}
             >
-              {/* <strong>{msg.senderId}:</strong>  */}{msg.content}
+              {msg.content}
             </div>
           ))}
           <div ref={messagesEndRef} />
         </div>
+
+        {/* Typing Indicator */}
         {typing && (
-          <div className="text-sm italic mb-1 text-gray-500">
+          <div className="text-sm italic mb-2 text-gray-500 px-2">
             User is typing...
           </div>
         )}
+
+        {/* Message Input */}
         <div className="flex">
           <input
-            className="flex-grow border rounded-l px-3 py-2"
+            className="flex-grow border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleTyping}
@@ -138,9 +157,9 @@ const ChatRoom = (props) => {
           />
           <button
             disabled={!props.indicator}
-            className={`px-4 rounded-r ${
+            className={`px-4 py-2 rounded-r-lg ${
               props.indicator
-                ? "bg-blue-500 text-white cursor-pointer"
+                ? "bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
             onClick={sendMessage}
@@ -150,7 +169,9 @@ const ChatRoom = (props) => {
         </div>
       </div>
     </div>
-  );
+  </div>
+  </>
+);
 };
 
 export default ChatRoom;
