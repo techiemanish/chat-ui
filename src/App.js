@@ -33,11 +33,12 @@ function App() {
     <Router>
       {/* <div className="min-h-screen bg-gray-100 p-4"> */}
         <Routes>
-          <Route path="/" element={<AuthApp />} />
-          <Route 
+          {/* <Route path="/" element={<AuthApp />} /> */}
+          <Route path="/" element={<ChatRoom indicator={flag} initialMessages={initialMessages} />} />
+          {/* <Route 
             path="/chat/:userId" 
             element={<ChatRoom indicator={flag} initialMessages={initialMessages} />} 
-          />
+          /> */}
         </Routes>
       {/* </div> */}
     </Router>

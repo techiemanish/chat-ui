@@ -93,7 +93,7 @@ const ChatRoom = (props) => {
     <>
     <ScrollToTop/>
   <div className="flex justify-center items-start p-4 bg-gray-100 h-screen">
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md mt-5">
       <div className="bg-white rounded-xl shadow-lg p-4">
         {/* User Selection */}
         <div className="flex flex-col space-y-2 mb-4 sm:flex-row sm:space-y-0 sm:space-x-2">
